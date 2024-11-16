@@ -1,95 +1,3 @@
-# import logging
-# from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
-# from telegram.ext import (
-#     ApplicationBuilder, CommandHandler, MessageHandler,
-#     CallbackContext, filters, InlineQueryHandler, ContextTypes
-# )
-# import requests
-# import random
-# import datetime
-
-# # Logging setup
-# logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-
-# # Free APIs
-# NUMBERS_API = "http://numbersapi.com"
-# TRIVIA_API = "https://opentdb.com/api.php?amount=1"
-# FACTS_DB = {
-#     "science": ["Water boils at 100°C.", "The sun is a star."],
-#     "history": ["The first computer was invented in the 1940s.", "The Roman Empire fell in 476 AD."],
-#     "sports": ["The Olympics were first held in 776 BC in Greece.", "Cricket is known as the 'Gentleman's Game'."]
-# }
-
-# async def start(update: Update, context: CallbackContext) -> None:
-#     await update.message.reply_text(
-#         "🤖 Welcome to Fun Fact & Trivia Bot! 🎉\n\n"
-#         "Use /fact to get a random fact.\n"
-#         "Use /fact [category] for a specific category.\n"
-#         "Use /today for facts based on today's date.\n"
-#         "Use /history for historical events.\n"
-#         "Use /number [number] for number facts.\n"
-#         "Use /quiz for a fun quiz!\n"
-#         "Use /subscribe to get daily facts."
-#     )
-
-# async def random_fact(update: Update, context: CallbackContext) -> None:
-#     category = 'general'
-#     if len(context.args) > 0:
-#         category = context.args[0].lower()
-    
-#     fact = random.choice(FACTS_DB.get(category, FACTS_DB['science']))
-#     await update.message.reply_text(f"💡 {fact}")
-
-# async def on_this_day(update: Update, context: CallbackContext) -> None:
-#     today = datetime.datetime.now()
-#     fact = f"On this day ({today.strftime('%d %B')}): Apollo 12 was launched (1969)."
-#     await update.message.reply_text(fact)
-
-# async def number_fact(update: Update, context: CallbackContext) -> None:
-#     if len(context.args) == 0:
-#         await update.message.reply_text("Please provide a number! E.g., /number 42")
-#         return
-    
-#     number = context.args[0]
-#     response = requests.get(f"{NUMBERS_API}/{number}/trivia")
-#     if response.ok:
-#         await update.message.reply_text(response.text)
-#     else:
-#         await update.message.reply_text("Couldn't fetch a fact. Try another number!")
-
-# async def quiz(update: Update, context: CallbackContext) -> None:
-#     response = requests.get(TRIVIA_API)
-#     question = response.json()['results'][0]
-#     await update.message.reply_poll(
-#         question=question['question'],
-#         options=question['incorrect_answers'] + [question['correct_answer']],
-#         type='quiz',
-#         correct_option_id=len(question['incorrect_answers'])
-#     )
-
-# async def subscribe(update: Update, context: CallbackContext) -> None:
-#     await update.message.reply_text("You've subscribed to daily facts!")
-#     # Add user to subscription list (Database or File)
-
-# async def unsubscribe(update: Update, context: CallbackContext) -> None:
-#     await update.message.reply_text("You've unsubscribed from daily facts.")
-#     # Remove user from subscription list
-
-# def main():
-#     app = ApplicationBuilder().token('7654001062:AAFIHYGcpomKXN9elAHN8YkhQaIfJ6xHmA0').build()
-#     app.add_handler(CommandHandler("start", start))
-#     app.add_handler(CommandHandler("fact", random_fact))
-#     app.add_handler(CommandHandler("today", on_this_day))
-#     app.add_handler(CommandHandler("number", number_fact))
-#     app.add_handler(CommandHandler("quiz", quiz))
-#     app.add_handler(CommandHandler("subscribe", subscribe))
-#     app.add_handler(CommandHandler("unsubscribe", unsubscribe))
-#     #   app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chat))
-#     print("Bot is running...")
-#     app.run_polling()
-
-# if __name__ == "__main__":
-#     main()
 import pytz
 import logging
 import requests
@@ -105,9 +13,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from dotenv import load_dotenv
 import os
 
-# Load environment variables
-load_dotenv()
-TOKEN = '7654001062:AAFIHYGcpomKXN9elAHN8YkhQaIfJ6xHmA0'  # Replace with your actual token
+
+TOKEN = 'YOUR_TELEGRAM_BOT_API_CODE'  # Replace with your actual token
 # Setup logging
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
