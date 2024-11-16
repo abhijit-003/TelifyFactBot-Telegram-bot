@@ -1,0 +1,6 @@
+python-telegram-bot==20.1
+requests
+apscheduler
+python-dotenv
+sqlite3
+pytz
